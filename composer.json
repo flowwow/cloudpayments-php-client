@@ -1,0 +1,30 @@
+{
+    "name": "flowwow/cloudpayments-php-client",
+    "description": "cloudpayments api client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maksim Khramov",
+            "email": "maxim.khramov@mail.ru"
+        }
+    ],
+    "keywords": [
+        "cloudpayments api",
+        "cloudpayments"
+    ],
+    "require": {
+        "php": ">=7.4",
+        "guzzlehttp/guzzle": "^7.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Flowwow\\Cloudpayments\\": "src"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit -c phpunit.xml"
+    }
+}
