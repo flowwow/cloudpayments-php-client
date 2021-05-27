@@ -2,11 +2,13 @@
 
 namespace Flowwow\Cloudpayments\Enum;
 
+use MyCLabs\Enum\Enum;
+
 /**
  * Bool-значения для клауда
  * https://developers.cloudkassir.ru/#agentsign
  */
-class BoolField
+class BoolField extends Enum
 {
     /**
      * True
