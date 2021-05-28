@@ -136,7 +136,7 @@ echo $hookData->transactionId;
 ...
 $apiClient = new \Flowwow\Cloudpayments\Library(\*...*\);
 $apiClient->setIdempotency(true);
-$apiClient->createPaymentByCard2Step(\*..*\);
+$apiClient->createPaymentByCard2Step(\*...*\);
 ...
 ```
 
