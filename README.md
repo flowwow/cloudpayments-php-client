@@ -8,6 +8,7 @@
 - [Параметры запроса](#параметры-запроса)
 - [Параметры ответа](#параметры-ответа)
 - [Уведомления](#уведомления)
+- [Идемпотентность](#идемпотентность)
 
 ## Установка
 
@@ -126,6 +127,18 @@ echo $hookData->transactionId;
 | Refund    | HookRefund    |
 | Recurrent | HookRecurrent |
 | Cancel    | HookCancel    |
+
+## Идемпотентность
+
+Библиотека поддерживает идемпотентные запросы
+
+```php
+...
+$apiClient = new \Flowwow\Cloudpayments\Library(\*...*\);
+$apiClient->setIdempotency(true);
+$apiClient->createPaymentByCard2Step(\*..*\);
+...
+```
 
 ## License
 
