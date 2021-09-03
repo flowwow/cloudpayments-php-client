@@ -26,6 +26,7 @@ use Flowwow\Cloudpayments\Request\TokenPayment;
 use Flowwow\Cloudpayments\Request\TokenTopUp;
 use Flowwow\Cloudpayments\Response\AppleSessionResponse;
 use Flowwow\Cloudpayments\Response\CloudResponse;
+use Flowwow\Cloudpayments\Response\KktReceiptResponse;
 use Flowwow\Cloudpayments\Response\NotificationResponse;
 use Flowwow\Cloudpayments\Response\OrderResponse;
 use Flowwow\Cloudpayments\Response\SubscriptionArrayResponse;
@@ -235,7 +236,7 @@ class Library
     {
         $method = 'kkt/receipt';
 
-        return $this->request($method, $data);
+        return $this->request($method, $data, new KktReceiptResponse());
     }
 
     /**

@@ -14,8 +14,8 @@ use stdClass;
 class CloudResponse extends BaseRequest
 {
     public bool    $success;
-    public ?string $message;
-    public ?string $warning;
+    public ?string $message = null;
+    public ?string $warning = null;
 
     /** @var BaseModel|stdClass */
     public $model;
@@ -31,6 +31,7 @@ class CloudResponse extends BaseRequest
 
         $this->success = $responseContent->Success ?? false;
         $this->message = $responseContent->Message ?? 'Message is not set';
+        $this->warning = $responseContent->Warning ?? 'Warning is not set';
         if (!empty($responseContent->Model)) {
             $this->fillModel($responseContent->Model);
         }
