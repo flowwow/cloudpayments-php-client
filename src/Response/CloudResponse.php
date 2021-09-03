@@ -15,6 +15,7 @@ class CloudResponse extends BaseRequest
 {
     public bool    $success;
     public ?string $message;
+    public ?string $warning;
 
     /** @var BaseModel|stdClass */
     public $model;
