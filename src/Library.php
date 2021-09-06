@@ -231,9 +231,9 @@ class Library
     /**
      * Создание чека
      * @param KktReceipt $data
-     * @return CloudResponse
+     * @return KktReceiptResponse
      */
-    public function createReceipt(KktReceipt $data): CloudResponse
+    public function createReceipt(KktReceipt $data): KktReceiptResponse
     {
         $method = 'kkt/receipt';
 
