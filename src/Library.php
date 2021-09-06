@@ -5,6 +5,7 @@ namespace Flowwow\Cloudpayments;
 use Flowwow\Cloudpayments\Request\ApplepayStartSession;
 use Flowwow\Cloudpayments\Request\CardsPayment;
 use Flowwow\Cloudpayments\Request\CardsTopUp;
+use Flowwow\Cloudpayments\Request\KktReceipt;
 use Flowwow\Cloudpayments\Request\NotificationsGet;
 use Flowwow\Cloudpayments\Request\NotificationsUpdate;
 use Flowwow\Cloudpayments\Request\OrderCancel;
@@ -229,14 +230,14 @@ class Library
 
     /**
      * Создание чека
-     * @param $data
+     * @param KktReceipt $data
      * @return CloudResponse
      */
-    public function createReceipt($data): CloudResponse
+    public function createReceipt(KktReceipt $data): CloudResponse
     {
         $method = 'kkt/receipt';
 
-        return $this->request($method, $data, new KktReceiptResponse());
+        return $this->request($method, $data->asArray(), new KktReceiptResponse());
     }
 
     /**
