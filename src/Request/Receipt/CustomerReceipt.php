@@ -24,7 +24,7 @@ class CustomerReceipt extends BaseRequest
     public ?array         $additionalReceiptInfos = null;
 
     /**
-     * @param array $items
+     * @param ReceiptItem[] $items
      * @param string $taxationSystem
      * @param ReceiptAmounts $amounts
      */
