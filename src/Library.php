@@ -47,11 +47,12 @@ class Library
 {
     const DEFAULT_URL = 'https://api.cloudpayments.ru/';
 
-    protected string $publicId;
-    protected string $pass;
-    protected string $url;
-    protected Client $client;
-    protected bool   $idempotency = false;
+    protected string  $publicId;
+    protected string  $pass;
+    protected string  $url;
+    protected Client  $client;
+    protected bool    $idempotency    = false;
+    protected ?string $idempotencyKey = null;
 
     /**
      * Library constructor.
@@ -97,6 +98,16 @@ class Library
     public function setIdempotency(bool $idempotency): void
     {
         $this->idempotency = $idempotency;
+    }
+
+    /**
+     * Кастомный ключ идемпотентности
+     * @param string $idempotencyKey
+     */
+    public function setIdempotencyKey(string $idempotencyKey): void
+    {
+        $this->setIdempotency(true);
+        $this->idempotencyKey = $idempotencyKey;
     }
 
     /**
@@ -435,7 +446,7 @@ class Library
         $options = ['form_params' => $postData];
 
         if ($this->idempotency) {
-            $options['headers'] = ['X-Request-ID' => $this->getRequestId($method, $postData)];
+            $options['headers'] = ['X-Request-ID' => $this->idempotencyKey ?? $this->getRequestId($method, $postData)];
         }
 
         return $this->client->post('/' . $method, $options);
