@@ -101,6 +101,7 @@ class Library
     }
 
     /**
+     * Кастомный ключ идемпотентности
      * @param string $idempotencyKey
      */
     public function setIdempotencyKey(string $idempotencyKey): void
