@@ -442,7 +442,7 @@ class Library
      * @param array $postData
      * @return ResponseInterface
      */
-    protected function sendRequest(string $method, array $postData = []): ResponseInterface
+    public function sendRequest(string $method, array $postData = []): ResponseInterface
     {
         $options = ['form_params' => $postData];
 
