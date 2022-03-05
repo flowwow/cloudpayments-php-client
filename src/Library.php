@@ -2,6 +2,7 @@
 
 namespace Flowwow\Cloudpayments;
 
+use Flowwow\Cloudpayments\Enum\CloudMethodsEnum;
 use Flowwow\Cloudpayments\Request\ApplepayStartSession;
 use Flowwow\Cloudpayments\Request\CardsPayment;
 use Flowwow\Cloudpayments\Request\CardsTopUp;
@@ -125,19 +126,19 @@ class Library
      */
     public function getPaymentDataByInvoice(PaymentsFind $data): TransactionResponse
     {
-        $method = 'payments/find';
+        $method = CloudMethodsEnum::PAYMENTS_FIND;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
     }
 
     /**
-     * Проверка платежа
+     * Метод получения детализации по транзакции
      * @param PaymentsGet $data
      * @return TransactionResponse
      */
     public function getPaymentData(PaymentsGet $data): TransactionResponse
     {
-        $method = 'payments/get';
+        $method = CloudMethodsEnum::PAYMENTS_GET;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
     }
@@ -149,7 +150,7 @@ class Library
      */
     public function createPaymentByToken2Step(TokenPayment $data): TransactionResponse
     {
-        $method = 'payments/tokens/auth';
+        $method = CloudMethodsEnum::PAYMENTS_TOKENS_AUTH;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
     }
@@ -161,7 +162,7 @@ class Library
      */
     public function createPaymentByCard2Step(CardsPayment $data): TransactionWith3dsResponse
     {
-        $method = 'payments/cards/auth';
+        $method = CloudMethodsEnum::PAYMENTS_CARDS_AUTH;
 
         return $this->request($method, $data->asArray(), new TransactionWith3dsResponse());
     }
@@ -173,19 +174,19 @@ class Library
      */
     public function post3Ds(Post3DS $data): TransactionResponse
     {
-        $method = 'payments/cards/post3ds';
+        $method = CloudMethodsEnum::PAYMENTS_CARDS_POST3DS;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
     }
 
     /**
-     * Првоередение оплаты по токену при одношаговой оплате
+     * Проведение оплаты по токену при одношаговой оплате
      * @param TokenPayment $data
      * @return TransactionResponse
      */
     public function executePaymentByToken(TokenPayment $data): TransactionResponse
     {
-        $method = 'payments/tokens/charge';
+        $method = CloudMethodsEnum::PAYMENTS_TOKENS_CHARGE;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
     }
@@ -197,7 +198,7 @@ class Library
      */
     public function confirmPayment(PaymentsConfirm $data): CloudResponse
     {
-        $method = 'payments/confirm';
+        $method = CloudMethodsEnum::PAYMENTS_CONFIRM;
 
         return $this->request($method, $data->asArray());
     }
@@ -209,7 +210,7 @@ class Library
      */
     public function getListPayment(PaymentsList $data): TransactionArrayResponse
     {
-        $method = 'payments/list';
+        $method = CloudMethodsEnum::PAYMENTS_LIST;
 
         return $this->request($method, $data->asArray(), new TransactionArrayResponse());
     }
@@ -222,7 +223,7 @@ class Library
      */
     public function cancelPayment(PaymentsVoid $data): CloudResponse
     {
-        $method = 'payments/void';
+        $method = CloudMethodsEnum::PAYMENTS_VOID;
 
         return $this->request($method, $data->asArray());
     }
@@ -234,7 +235,7 @@ class Library
      */
     public function startSession(ApplepayStartSession $data): AppleSessionResponse
     {
-        $method = 'applepay/startsession';
+        $method = CloudMethodsEnum::APPLEPAY_STARTSESSION;
 
         return $this->request($method, $data->asArray(), new AppleSessionResponse());
     }
@@ -246,7 +247,7 @@ class Library
      */
     public function createReceipt(KktReceipt $data): KktReceiptResponse
     {
-        $method = 'kkt/receipt';
+        $method = CloudMethodsEnum::KKT_RECEIPT;
 
         return $this->request($method, $data->asArray(), new KktReceiptResponse());
     }
@@ -258,7 +259,7 @@ class Library
      */
     public function paymentsRefund(PaymentsRefund $data): TransactionResponse
     {
-        $method = 'payments/refund';
+        $method = CloudMethodsEnum::PAYMENTS_REFUND;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
     }
@@ -271,7 +272,7 @@ class Library
      */
     public function paymentsCardsCharge(CardsPayment $data): TransactionWith3dsResponse
     {
-        $method = 'payments/cards/charge';
+        $method = CloudMethodsEnum::PAYMENTS_CARDS_CHARGE;
 
         return $this->request($method, $data->asArray(), new TransactionWith3dsResponse());
     }
@@ -283,7 +284,7 @@ class Library
      */
     public function paymentsCardsTopup(CardsTopUp $data): TransactionResponse
     {
-        $method = 'payments/cards/topup';
+        $method = CloudMethodsEnum::PAYMENTS_CARDS_TOPUP;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
     }
@@ -295,7 +296,7 @@ class Library
      */
     public function paymentsTokenTopup(TokenTopUp $data): TransactionResponse
     {
-        $method = 'payments/token/topup';
+        $method = CloudMethodsEnum::PAYMENTS_TOKEN_TOPUP;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
     }
@@ -307,7 +308,7 @@ class Library
      */
     public function paymentsTokensList(?TokenList $data = null): TokenArrayResponse
     {
-        $method = 'payments/tokens/list';
+        $method = CloudMethodsEnum::PAYMENTS_TOKENS_LIST;
 
         return $this->request($method, $data === null ? [] : $data->asArray(), new TokenArrayResponse());
     }
@@ -319,7 +320,7 @@ class Library
      */
     public function subscriptionsCreate(SubscriptionCreate $data): SubscriptionResponse
     {
-        $method = 'subscriptions/create';
+        $method = CloudMethodsEnum::SUBSCRIPTIONS_CREATE;
 
         return $this->request($method, $data->asArray(), new SubscriptionResponse());
     }
@@ -331,7 +332,7 @@ class Library
      */
     public function subscriptionsGet(SubscriptionGet $data): SubscriptionResponse
     {
-        $method = 'subscriptions/get';
+        $method = CloudMethodsEnum::SUBSCRIPTIONS_GET;
 
         return $this->request($method, $data->asArray(), new SubscriptionResponse());
     }
@@ -343,7 +344,7 @@ class Library
      */
     public function subscriptionsFind(SubscriptionFind $data): SubscriptionArrayResponse
     {
-        $method = 'subscriptions/find';
+        $method = CloudMethodsEnum::SUBSCRIPTIONS_FIND;
 
         return $this->request($method, $data->asArray(), new SubscriptionArrayResponse());
     }
@@ -355,7 +356,7 @@ class Library
      */
     public function subscriptionsUpdate(SubscriptionUpdate $data): SubscriptionResponse
     {
-        $method = 'subscriptions/update';
+        $method = CloudMethodsEnum::SUBSCRIPTIONS_UPDATE;
 
         return $this->request($method, $data->asArray(), new SubscriptionResponse());
     }
@@ -367,7 +368,7 @@ class Library
      */
     public function subscriptionsCancel(SubscriptionCancel $data): CloudResponse
     {
-        $method = 'subscriptions/cancel';
+        $method = CloudMethodsEnum::SUBSCRIPTIONS_CANCEL;
 
         return $this->request($method, $data->asArray());
     }
@@ -379,7 +380,7 @@ class Library
      */
     public function ordersCreate(OrderCreate $data): OrderResponse
     {
-        $method = 'orders/create';
+        $method = CloudMethodsEnum::ORDERS_CREATE;
 
         return $this->request($method, $data->asArray(), new OrderResponse());
     }
@@ -391,7 +392,7 @@ class Library
      */
     public function ordersCancel(OrderCancel $data): CloudResponse
     {
-        $method = 'orders/cancel';
+        $method = CloudMethodsEnum::ORDERS_CANCEL;
 
         return $this->request($method, $data->asArray());
     }
