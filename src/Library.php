@@ -15,6 +15,7 @@ use Flowwow\Cloudpayments\Request\PaymentsConfirm;
 use Flowwow\Cloudpayments\Request\PaymentsFind;
 use Flowwow\Cloudpayments\Request\PaymentsGet;
 use Flowwow\Cloudpayments\Request\PaymentsList;
+use Flowwow\Cloudpayments\Request\PaymentsListV2;
 use Flowwow\Cloudpayments\Request\PaymentsRefund;
 use Flowwow\Cloudpayments\Request\PaymentsVoid;
 use Flowwow\Cloudpayments\Request\Post3DS;
@@ -215,6 +216,17 @@ class Library
         return $this->request($method, $data->asArray(), new TransactionArrayResponse());
     }
 
+    /**
+     * Список транзакций за определенное время
+     * @param PaymentsListV2 $data
+     * @return TransactionArrayResponse
+     */
+    public function getListPaymentV2(PaymentsListV2 $data): TransactionArrayResponse
+    {
+        $method = CloudMethodsEnum::PAYMENTS_LIST_V2;
+
+        return $this->request($method, $data->asArray(), new TransactionArrayResponse());
+    }
 
     /**
      * Отмена оплаты

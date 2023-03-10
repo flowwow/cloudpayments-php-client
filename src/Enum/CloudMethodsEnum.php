@@ -37,6 +37,9 @@ class CloudMethodsEnum extends Enum
     /** Список транзакций за определенное время */
     public const PAYMENTS_LIST = 'payments/list';
 
+    /** Список транзакций за определенное время */
+    public const PAYMENTS_LIST_V2 = 'v2/payments/list';
+
     /** Отмена оплаты */
     public const PAYMENTS_VOID = 'payments/void';
 
