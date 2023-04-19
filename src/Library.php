@@ -61,21 +61,26 @@ class Library
      * @param string $publicId
      * @param string $pass
      * @param string|null $cpUrlApi
+     * @param array|null $options
      */
-    public function __construct(string $publicId, string  $pass, ?string $cpUrlApi = null)
+    public function __construct(string $publicId, string  $pass, ?string $cpUrlApi = null, ?array $options = null)
     {
         $this->url      = $cpUrlApi === null ? self::DEFAULT_URL : $cpUrlApi;
         $this->publicId = $publicId;
         $this->pass     = $pass;
-
-        $this->client = new Client([
+        $data           = [
             'base_uri' => $this->url,
             'auth'     => [
                 $this->publicId,
                 $this->pass,
             ],
             'expect'   => false
-        ]);
+        ];
+        if ($options) {
+            $data = array_merge($options, $data);
+        }
+
+        $this->client = new Client($data);
     }
 
     /**
