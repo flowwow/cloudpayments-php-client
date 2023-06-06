@@ -449,7 +449,7 @@ class Library
     {
         $response = $this->sendRequest($method, $postData);
 
-        $cloudResponse ??= new CloudResponse();
+        $cloudResponse = $cloudResponse ?? new CloudResponse();
         return $cloudResponse->fillByResponse($response);
     }
 
