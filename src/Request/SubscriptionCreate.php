@@ -29,6 +29,6 @@ class SubscriptionCreate extends BaseRequest
     public DateTime    $startDate;
     public string      $interval;
     public int         $period;
-    public ?int        $maxPeriods;
-    public ?string     $customerReceipt;
+    public ?int        $maxPeriods = null;
+    public ?string     $customerReceipt = null;
 }

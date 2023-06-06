@@ -16,9 +16,9 @@ class NotificationsUpdate extends BaseRequest
      * @var string
      */
     public string  $type;
-    public ?bool   $isEnabled;
-    public ?string $address;
-    public ?string $httpMethod;
-    public ?string $encoding;
-    public ?string $format;
+    public ?bool   $isEnabled = null;
+    public ?string $address = null;
+    public ?string $httpMethod = null;
+    public ?string $encoding = null;
+    public ?string $format = null;
 }

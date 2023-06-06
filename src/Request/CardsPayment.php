@@ -18,16 +18,16 @@ class CardsPayment extends BaseRequest
     public         $amount;
     public string  $currency;
     public string  $ipAddress;
-    public ?string $name;//Обязательно если не эппл и не гуглпей
+    public ?string $name = null;//Обязательно если не эппл и не гуглпей
     public string  $cardCryptogramPacket;
-    public ?string $paymentUrl;
-    public ?string $invoiceId;
-    public ?string $description;
-    public ?string $cultureName;
-    public ?string $accountId;
-    public ?string $email;
+    public ?string $paymentUrl = null;
+    public ?string $invoiceId = null;
+    public ?string $description = null;
+    public ?string $cultureName = null;
+    public ?string $accountId = null;
+    public ?string $email = null;
     public ?array  $payer;
-    public ?string $jsonData;
+    public ?string $jsonData = null;
 
     /**
      * CardsPayment constructor.

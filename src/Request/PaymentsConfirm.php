@@ -18,7 +18,7 @@ class PaymentsConfirm extends BaseRequest
      */
     public         $amount;
     public int     $transactionId;
-    public ?string $jsonData;
+    public ?string $jsonData = null;
 
     /**
      * PaymentsConfirm constructor.

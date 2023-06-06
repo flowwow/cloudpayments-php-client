@@ -18,11 +18,11 @@ class TokenPayment extends BaseRequest
     public string  $currency;
     public string  $accountId;
     public string  $token;
-    public ?string $invoiceId;
-    public ?string $description;
-    public ?string $ipAddress;
-    public ?string $email;
-    public ?string $jsonData;
+    public ?string $invoiceId = null;
+    public ?string $description = null;
+    public ?string $ipAddress = null;
+    public ?string $email = null;
+    public ?string $jsonData = null;
 
     /**
      * TokenPayment constructor.
