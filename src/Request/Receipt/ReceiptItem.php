@@ -13,7 +13,7 @@ class ReceiptItem extends BaseRequest
     public string                      $price;
     public string                      $quantity;
     public string                      $amount;
-    public string                      $vat;
+    public ?string                      $vat;
     public ?string                     $method                      = null;
     public ?string                     $object                      = null;
     public ?string                     $measurementUnit             = null;
@@ -34,12 +34,12 @@ class ReceiptItem extends BaseRequest
 
 
     /**
-     * @param string $label
-     * @param string $price
-     * @param string $amount
-     * @param string $vat
+     * @param string      $label
+     * @param string      $price
+     * @param string      $amount
+     * @param string|null $vat
      */
-    public function __construct(string $label, string $price, string $amount, string $vat)
+    public function __construct(string $label, string $price, string $amount, ?string $vat = null)
     {
         $this->label  = $label;
         $this->price  = $price;
