@@ -7,11 +7,11 @@ use Flowwow\Cloudpayments\BaseRequest;
 class ReceiptUserRequisiteData extends BaseRequest
 {
     public string $requisiteKey;
-    public string $RequisiteValue;
+    public string $requisiteValue;
 
     public function __construct(string $key, string $value)
     {
-        $this->requisiteKey = $key;
-        $this->RequisiteValue = $value;
+        $this->requisiteKey   = $key;
+        $this->requisiteValue = $value;
     }
 }
