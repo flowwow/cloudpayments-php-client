@@ -490,12 +490,12 @@ class Library
      * Запрос статуса чека
      * @param string $receiptId
      *
-     * @return KktReceiptResponse
+     * @return CloudResponse
      */
-    public function getReceiptStatus(string $receiptId): KktReceiptResponse
+    public function getReceiptStatus(string $receiptId): CloudResponse
     {
         $method = CloudMethodsEnum::KKT_RECEIPT.'/status/get';
 
-        return $this->request($method, ['Id' => $receiptId], new KktReceiptResponse());
+        return $this->request($method, ['Id' => $receiptId]);
     }
 }
