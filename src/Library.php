@@ -485,4 +485,17 @@ class Library
 
         return md5($stringData);
     }
+
+    /**
+     * Запрос статуса чека
+     * @param string $receiptId
+     *
+     * @return CloudResponse
+     */
+    public function getReceiptStatus(string $receiptId): CloudResponse
+    {
+        $method = CloudMethodsEnum::KKT_RECEIPT.'/status/get';
+
+        return $this->request($method, ['Id' => $receiptId]);
+    }
 }
