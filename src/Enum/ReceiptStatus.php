@@ -2,6 +2,8 @@
 
 namespace Flowwow\Cloudpayments\Enum;
 
+use MyCLabs\Enum\Enum;
+
 /**
  * Статус чека
  *
