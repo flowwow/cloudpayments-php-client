@@ -13,7 +13,7 @@ use Flowwow\Cloudpayments\Exceptions\BadTypeException;
 class ApplepayStartSession extends BaseRequest
 {
     public string  $validationUrl;
-    public ?string $paymentUrl;
+    public ?string $paymentUrl = null;
 
     /**
      * ApplepayStartSession constructor.

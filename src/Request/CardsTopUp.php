@@ -19,10 +19,10 @@ class CardsTopUp extends BaseRequest
     public         $amount;
     public string  $accountId;
     public string  $currency;
-    public ?string $email;
-    public ?string $jsonData;
-    public ?string $invoiceId;
-    public ?string $description;
+    public ?string $email = null;
+    public ?string $jsonData = null;
+    public ?string $invoiceId = null;
+    public ?string $description = null;
     public ?array  $payer;
     public ?array  $receiver;
 }

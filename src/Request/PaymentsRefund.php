@@ -17,7 +17,7 @@ class PaymentsRefund extends BaseRequest
      */
     public         $amount;
     public int     $transactionId;
-    public ?string $jsonData;
+    public ?string $jsonData = null;
 
     /**
      * PaymentsRefund constructor.

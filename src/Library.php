@@ -65,7 +65,7 @@ class Library
      */
     public function __construct(string $publicId, string  $pass, ?string $cpUrlApi = null, ?array $options = null)
     {
-        $this->url      = $cpUrlApi === null ? self::DEFAULT_URL : $cpUrlApi;
+        $this->url      = $cpUrlApi ?? self::DEFAULT_URL;
         $this->publicId = $publicId;
         $this->pass     = $pass;
         $data           = [
