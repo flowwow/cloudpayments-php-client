@@ -24,7 +24,7 @@ class TokenPayment extends BaseRequest
     public ?string $ipAddress;
     public ?string $email;
     public ?string $jsonData;
-    public int     $TrInitiatorCode = trInitiatorCode::BY_CARDHOLDER;
+    public ?int     $trInitiatorCode;
 
     /**
      * TokenPayment constructor.
@@ -33,11 +33,12 @@ class TokenPayment extends BaseRequest
      * @param string $accountId
      * @param string $token
      */
-    public function __construct($amount, string $currency, string $accountId, string $token)
+    public function __construct($amount, string $currency, string $accountId, string $token, int $initiator)
     {
         $this->amount    = $amount;
         $this->currency  = $currency;
         $this->accountId = $accountId;
         $this->token     = $token;
+        $this->trInitiatorCode = $initiator;
     }
 }
