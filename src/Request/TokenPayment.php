@@ -3,6 +3,7 @@
 namespace Flowwow\Cloudpayments\Request;
 
 use Flowwow\Cloudpayments\BaseRequest;
+use Flowwow\Cloudpayments\Enum\trInitiatorCode;
 
 /**
  * Class TokenPayment
@@ -23,6 +24,7 @@ class TokenPayment extends BaseRequest
     public ?string $ipAddress;
     public ?string $email;
     public ?string $jsonData;
+    public int     $TrInitiatorCode = trInitiatorCode::BY_CARDHOLDER;
 
     /**
      * TokenPayment constructor.
