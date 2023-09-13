@@ -9,7 +9,7 @@ use MyCLabs\Enum\Enum;
  *
  * @see https://developers.cloudpayments.ru/#oplata-po-tokenu-rekarring
  */
-class trInitiatorCode extends Enum
+class TrInitiatorCode extends Enum
 {
     /**
      * Транзакция инициирована ТСП на основе ранее сохраненных учетных данных

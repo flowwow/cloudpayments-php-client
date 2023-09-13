@@ -3,7 +3,6 @@
 namespace Flowwow\Cloudpayments\Request;
 
 use Flowwow\Cloudpayments\BaseRequest;
-use Flowwow\Cloudpayments\Enum\trInitiatorCode;
 
 /**
  * Class TokenPayment

@@ -1,6 +1,6 @@
 <?php
 
-use Flowwow\Cloudpayments\Enum\trInitiatorCode;
+use Flowwow\Cloudpayments\Enum\TrInitiatorCode;
 use Flowwow\Cloudpayments\Library;
 use Flowwow\Cloudpayments\Request\ApplepayStartSession;
 use Flowwow\Cloudpayments\Request\CardsPayment;
@@ -47,7 +47,7 @@ class LibraryTest extends TestCase
         $library = clone $this->library;
         $library->expects($this->once())->method('sendRequest')->willReturn($response);
 
-        $data   = new TokenPayment(100, 'RUB', '100', '100', trInitiatorCode::BY_CARDHOLDER);
+        $data = new TokenPayment(100, 'RUB', '100', '100', TrInitiatorCode::BY_CARDHOLDER);
         $result = $library->createPaymentByToken2Step($data);
 
         $this->assertEquals(false, $result->success);
