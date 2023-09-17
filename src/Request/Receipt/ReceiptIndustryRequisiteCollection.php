@@ -4,6 +4,10 @@ namespace Flowwow\Cloudpayments\Request\Receipt;
 
 use Flowwow\Cloudpayments\BaseRequest;
 
+/**
+ * Отраслевой реквизит чека
+ * @see https://developers.cloudkassir.ru/#industryrequisitecollection
+ */
 class ReceiptIndustryRequisiteCollection extends BaseRequest
 {
     /** @var string  Идентификатор ФОИВ, тег ОФД 1262 */
