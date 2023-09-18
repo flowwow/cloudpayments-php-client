@@ -4,7 +4,6 @@ namespace Flowwow\Cloudpayments\Enum;
 
 use MyCLabs\Enum\Enum;
 
-
 /**
  * Ставка НДС
  * @see https://developers.cloudkassir.ru/#vatrate

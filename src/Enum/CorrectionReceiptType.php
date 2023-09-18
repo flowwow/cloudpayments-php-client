@@ -11,10 +11,10 @@ use MyCLabs\Enum\Enum;
 class CorrectionReceiptType extends Enum
 {
     /** @var int Корректировка прихода */
-    public const PARISH_ADJUSTMENT = 1;
+    public const INCOME = 1;
 
     /** @var int Возврат прихода */
-    public const RETURN_OF_PARISH = 2;
+    public const REFUND = 2;
 
     /** @var int Корректировка расхода */
     public const EXPENSE_ADJUSTMENT = 3;
