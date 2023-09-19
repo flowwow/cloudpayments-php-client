@@ -84,4 +84,7 @@ class CloudMethodsEnum extends Enum
 
     /** Создание чека */
     public const KKT_RECEIPT = 'kkt/receipt';
+
+    /** Создание чека коррекции */
+    public const CORRECTION_RECEIPT = 'kkt/correction-receipt';
 }

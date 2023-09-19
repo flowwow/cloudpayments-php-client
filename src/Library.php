@@ -19,6 +19,7 @@ use Flowwow\Cloudpayments\Request\PaymentsListV2;
 use Flowwow\Cloudpayments\Request\PaymentsRefund;
 use Flowwow\Cloudpayments\Request\PaymentsVoid;
 use Flowwow\Cloudpayments\Request\Post3DS;
+use Flowwow\Cloudpayments\Request\Receipt\CorrectionReceiptData;
 use Flowwow\Cloudpayments\Request\SubscriptionCancel;
 use Flowwow\Cloudpayments\Request\SubscriptionCreate;
 use Flowwow\Cloudpayments\Request\SubscriptionFind;
@@ -63,7 +64,7 @@ class Library
      * @param string|null $cpUrlApi
      * @param array|null $options
      */
-    public function __construct(string $publicId, string  $pass, ?string $cpUrlApi = null, ?array $options = null)
+    public function __construct(string $publicId, string $pass, ?string $cpUrlApi = null, ?array $options = null)
     {
         $this->url      = $cpUrlApi === null ? self::DEFAULT_URL : $cpUrlApi;
         $this->publicId = $publicId;
@@ -445,11 +446,15 @@ class Library
      * @param CloudResponse|null $cloudResponse
      * @return mixed
      */
-    protected function request(string $method, array $postData = [], ?CloudResponse $cloudResponse = null): CloudResponse
-    {
+    protected function request(
+        string $method,
+        array $postData = [],
+        ?CloudResponse $cloudResponse = null
+    ): CloudResponse {
         $response = $this->sendRequest($method, $postData);
 
         $cloudResponse = $cloudResponse ?? new CloudResponse();
+
         return $cloudResponse->fillByResponse($response);
     }
 
@@ -489,13 +494,24 @@ class Library
     /**
      * Запрос статуса чека
      * @param string $receiptId
-     *
      * @return CloudResponse
      */
     public function getReceiptStatus(string $receiptId): CloudResponse
     {
-        $method = CloudMethodsEnum::KKT_RECEIPT.'/status/get';
+        $method = CloudMethodsEnum::KKT_RECEIPT . '/status/get';
 
         return $this->request($method, ['Id' => $receiptId]);
+    }
+
+    /**
+     * Формирование чека коррекции
+     * @param CorrectionReceiptData $data
+     * @return CloudResponse|mixed
+     */
+    public function createCorrectionReceipt(CorrectionReceiptData $data)
+    {
+        $method = CloudMethodsEnum::CORRECTION_RECEIPT;
+
+        return $this->request($method, ['CorrectionReceiptData' => $data]);
     }
 }
