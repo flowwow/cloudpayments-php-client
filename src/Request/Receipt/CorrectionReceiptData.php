@@ -35,8 +35,8 @@ class CorrectionReceiptData extends BaseRequest
     /** @var ReceiptAmounts Общая сумма платежа или возврата */
     public ReceiptAmounts $amounts;
 
-    /** @var ReceiptItem Содержимое позиций чека, см. выше. (обязательный для ФФД 1.2) */
-    public ReceiptItem $items;
+    /** @var ReceiptItem[] Содержимое позиций чека, см. выше. (обязательный для ФФД 1.2) */
+    public array $items;
 
     /** @var ReceiptIndustryRequisiteCollection[]|null Отраслевой реквизит чека, тег ОФД 1261 см. выше (ффд 1.2) */
     public ?array $industryRequisites;
