@@ -3,6 +3,7 @@
 namespace Flowwow\Cloudpayments;
 
 use Flowwow\Cloudpayments\Enum\BoolField;
+use MyCLabs\Enum\Enum;
 
 /**
  * Базовый класс моделей фондю
@@ -28,9 +29,10 @@ class BaseRequest
                 $value = BoolField::FALSE;
             }
             //Пустые поля слать не будем
-            if ($value !== null) {
-                $data[$key] = $value;
+            if ($value === null) {
+                continue;
             }
+            $data[$key] = $value;
 
             if ($value instanceof BaseRequest) {
                 $data[$key] = $value->asArray();
@@ -42,10 +44,15 @@ class BaseRequest
                     if ($item instanceof BaseRequest) {
                         $item = $item->asArray();
                     }
-
+                    if ($value instanceof Enum) {
+                        $item = $value->getValue();
+                    }
                     $computed[] = $item;
                 }
                 $data[$key] = $computed;
+            }
+            if ($value instanceof Enum) {
+                $data[$key] = $value->getValue();
             }
         }
 
