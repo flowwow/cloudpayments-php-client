@@ -441,17 +441,19 @@ class Library
 
     /**
      * Базовый запрос
-     * @param string $method
-     * @param array $postData
+     * @param string $method API endpoint
+     * @param array $postData Передаваемые данные
      * @param CloudResponse|null $cloudResponse
+     * @param bool $asJson Отправка как JSON
      * @return mixed
      */
     protected function request(
         string $method,
         array $postData = [],
-        ?CloudResponse $cloudResponse = null
+        ?CloudResponse $cloudResponse = null,
+        bool $asJson = false
     ): CloudResponse {
-        $response = $this->sendRequest($method, $postData);
+        $response = $this->sendRequest($method, $postData, $asJson);
 
         $cloudResponse = $cloudResponse ?? new CloudResponse();
 
@@ -460,17 +462,25 @@ class Library
 
     /**
      * Запрос по api
-     * @param string $method
-     * @param array $postData
+     * @param string $method HTTP method (get, post, etc)
+     * @param array $postData send data
+     * @param bool $asJson send with JSON body
      * @return ResponseInterface
      */
-    public function sendRequest(string $method, array $postData = []): ResponseInterface
+    public function sendRequest(string $method, array $postData = [], bool $asJson = false): ResponseInterface
     {
-        $options = ['form_params' => $postData];
-
         if ($this->idempotency) {
-            $options['headers'] = ['X-Request-ID' => $this->idempotencyKey ?? $this->getRequestId($method, $postData)];
+            $options['headers']['X-Request-ID'] = $this->idempotencyKey ?? $this->getRequestId($method, $postData);
         }
+
+        if ($asJson) {
+            $options['headers']['Content-Type'] = 'application/json';
+            $options['json']                    = $postData;
+        } else {
+            $options['headers']['Content-Type'] = 'application/x-www-form-urlencoded';
+            $options['form_params']             = $postData;
+        }
+
 
         return $this->client->post('/' . $method, $options);
     }
@@ -512,6 +522,18 @@ class Library
     {
         $method = CloudMethodsEnum::CORRECTION_RECEIPT;
 
-        return $this->request($method, ['CorrectionReceiptData' => $data]);
+        return $this->request($method, ['CorrectionReceiptData' => $data->asArray()], null, true);
+    }
+
+    /**
+     * Получение данных о чеке коррекции
+     * @param string $receiptId ID-чека
+     * @return CloudResponse
+     */
+    public function getCorrectionReceiptInfo(string $receiptId): CloudResponse
+    {
+        $method = CloudMethodsEnum::CORRECTION_RECEIPT . '/get';
+
+        return $this->request($method, ['Id' => $receiptId]);
     }
 }
