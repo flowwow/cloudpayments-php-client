@@ -41,6 +41,7 @@ use Flowwow\Cloudpayments\Response\TransactionResponse;
 use Flowwow\Cloudpayments\Response\TransactionWith3dsResponse;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Библиотека методов для работы с CloudPayments
@@ -57,15 +58,25 @@ class Library
     protected bool    $idempotency    = false;
     protected ?string $idempotencyKey = null;
 
+    protected $logger;
+
     /**
      * Library constructor.
      * @param string $publicId
      * @param string $pass
      * @param string|null $cpUrlApi
      * @param array|null $options
+     * @param Client|null $client
+     * @param LoggerInterface|null $logger
      */
-    public function __construct(string $publicId, string $pass, ?string $cpUrlApi = null, ?array $options = null)
-    {
+    public function __construct(
+        string $publicId,
+        string $pass,
+        ?string $cpUrlApi = null,
+        ?array $options = null,
+        Client $client = null,
+        LoggerInterface $logger = null
+    ) {
         $this->url      = $cpUrlApi === null ? self::DEFAULT_URL : $cpUrlApi;
         $this->publicId = $publicId;
         $this->pass     = $pass;
@@ -81,7 +92,8 @@ class Library
             $data = array_merge($options, $data);
         }
 
-        $this->client = new Client($data);
+        $this->client = $client ?? new Client($data);
+        $this->logger = $logger;
     }
 
     /**
@@ -454,6 +466,20 @@ class Library
         bool $asJson = false
     ): CloudResponse {
         $response = $this->sendRequest($method, $postData, $asJson);
+        if ($this->logger) {
+            $context = [
+                'method'   => $method,
+                'postData' => $postData,
+                'asJson'   => $asJson ? 'yes' : 'no',
+                'trace'    => debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 20)
+            ];
+            $msg     = $response->getBody()->getContents();
+            if ($response->getStatusCode() !== 200) {
+                $this->logger->error($msg, $context);
+            } else {
+                $this->logger->debug($msg, $context);
+            }
+        }
 
         $cloudResponse = $cloudResponse ?? new CloudResponse();
 
