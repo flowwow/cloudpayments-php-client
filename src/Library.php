@@ -560,6 +560,6 @@ class Library
     {
         $method = CloudMethodsEnum::CORRECTION_RECEIPT . '/get';
 
-        return $this->request($method, ['Id' => $receiptId]);
+        return $this->request($method, ['Id' => $receiptId], null, true);
     }
 }
