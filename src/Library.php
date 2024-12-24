@@ -17,6 +17,8 @@ use Flowwow\Cloudpayments\Request\PaymentsGet;
 use Flowwow\Cloudpayments\Request\PaymentsList;
 use Flowwow\Cloudpayments\Request\PaymentsListV2;
 use Flowwow\Cloudpayments\Request\PaymentsRefund;
+use Flowwow\Cloudpayments\Request\PaymentsSbpLink;
+use Flowwow\Cloudpayments\Request\PaymentsSbpQr;
 use Flowwow\Cloudpayments\Request\PaymentsVoid;
 use Flowwow\Cloudpayments\Request\Post3DS;
 use Flowwow\Cloudpayments\Request\Receipt\CorrectionReceiptData;
@@ -341,6 +343,30 @@ class Library
         $method = CloudMethodsEnum::PAYMENTS_TOKENS_LIST;
 
         return $this->request($method, $data === null ? [] : $data->asArray(), new TokenArrayResponse());
+    }
+
+    /**
+     * Создание оплаты СБП по ссылке
+     * @param PaymentsSbpLink $data
+     * @return TransactionResponse
+     */
+    public function paymentsSbpLink(PaymentsSbpLink $data): TransactionResponse
+    {
+        $method = CloudMethodsEnum::PAYMENTS_SBP_LINK;
+
+        return $this->request($method, $data->asArray(), new TransactionResponse());
+    }
+
+    /**
+     * Создание оплаты СБП по QR-коду
+     * @param PaymentsSbpQr $data
+     * @return TransactionResponse
+     */
+    public function paymentsSbpQr(PaymentsSbpQr $data): TransactionResponse
+    {
+        $method = CloudMethodsEnum::PAYMENTS_SBP_QR;
+
+        return $this->request($method, $data->asArray(), new TransactionResponse());
     }
 
     /**
