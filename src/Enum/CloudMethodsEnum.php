@@ -43,6 +43,12 @@ class CloudMethodsEnum extends Enum
     /** Отмена оплаты */
     public const PAYMENTS_VOID = 'payments/void';
 
+    /** Генерация платежной ссылки СБП */
+    public const PAYMENTS_SBP_LINK = 'payments/qr/sbp/link';
+
+    /** Генерация QR-кода СБП */
+    public const PAYMENTS_SBP_QR = 'payments/qr/sbp/image';
+
     /** Старт сессии Applepay */
     public const APPLEPAY_STARTSESSION = 'applepay/startsession';
 

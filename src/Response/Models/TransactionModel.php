@@ -33,6 +33,7 @@ class TransactionModel extends BaseModel
     public ?string $confirmDateIso                        = null;
     public ?string $authCode                              = null;
     public ?bool   $testMode                              = null;
+    public ?bool   $isTest                                = null;
     public ?string $rrn                                   = null;
     public ?int    $originalTransactionId                 = null;
     public ?int    $fallBackScenarioDeclinedTransactionId = null;
@@ -72,6 +73,10 @@ class TransactionModel extends BaseModel
     public ?bool   $masterPass                            = null;
     public ?float  $totalFee                              = null;
     public ?int    $escrowAccumulationId                  = null;
+    public ?string $qrUrl                                 = null;
+    public ?string $qrImage                               = null;
+    /** @var SbpBankModel[]|null  */
+    public ?array  $sbpBankModels                         = null;
 
     /**
      * Получение переведенного кода ошибки
