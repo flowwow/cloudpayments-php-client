@@ -5,7 +5,7 @@ namespace Flowwow\Cloudpayments\Enum;
 use MyCLabs\Enum\Enum;
 
 /**
- * Признак способа расчета.
+ * Значения ставки НДС.
  * https://developers.cloudkassir.ru/#vat
  *
  * @see Enum
