@@ -5,7 +5,7 @@ namespace Flowwow\Cloudpayments\Enum;
 use MyCLabs\Enum\Enum;
 
 /**
- * Признак способа расчета.
+ * Значения ставки НДС.
  * https://developers.cloudkassir.ru/#vat
  *
  * @see Enum
@@ -23,6 +23,16 @@ class Vat extends Enum
      */
     public const PERCENT_0 = 0;
     /**
+     * 5% НДС
+     * @var int
+     */
+    public const PERCENT_5 = 5;
+    /**
+     * 7% НДС
+     * @var int
+     */
+    public const PERCENT_7 = 7;
+    /**
      * 10% НДС
      * @var int
      */
@@ -32,6 +42,16 @@ class Vat extends Enum
      * @var int
      */
     public const PERCENT_20 = 20;
+    /**
+     * Расчетный НДС 5/105
+     * @var int
+     */
+    public const PERCENT_105 = 105;
+    /**
+     * Расчетный НДС 7/107
+     * @var int
+     */
+    public const PERCENT_107 = 107;
     /**
      * Расчетный НДС 10/110
      * @var int
