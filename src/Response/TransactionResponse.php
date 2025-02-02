@@ -22,14 +22,17 @@ class TransactionResponse extends CloudResponse
     public function fillModel($modelDate)
     {
         $model = new TransactionModel();
-        $model->fill($modelDate);
+        $banks = [];
         if (isset($modelDate->Banks->dictionary) && is_array($modelDate->Banks->dictionary)) {
-            $banks = [];
             foreach ($modelDate->Banks->dictionary as $bankValue) {
                 $bank    = new SbpBankModel();
                 $bank->fill($bankValue);
                 $banks[] = $bank;
             }
+            unset($modelDate->Banks);
+        }
+        $model->fill($modelDate);
+        if (!empty($banks)) {
             $model->sbpBankModels = $banks;
         }
 
