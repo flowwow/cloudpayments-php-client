@@ -62,7 +62,7 @@ class TransactionModel extends BaseModel
     public ?int    $type                                  = null;
     public ?bool   $refunded                              = null;
     public ?string $name                                  = null;
-    public ?int    $subscriptionId                        = null;
+    public ?string $subscriptionId                        = null;
     public ?bool   $isLocalOrder                          = null;
     public ?bool   $hideInvoiceId                         = null;
     public ?string $token                                 = null;
