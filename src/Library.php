@@ -47,7 +47,6 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Библиотека методов для работы с CloudPayments
- *
  * Class Library
  */
 class Library
