@@ -28,6 +28,7 @@ class CardsPayment extends BaseRequest
     public ?string $email;
     public ?array  $payer;
     public ?string $jsonData;
+    public bool    $saveCard;
 
     /**
      * CardsPayment constructor.
