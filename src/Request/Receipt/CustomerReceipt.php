@@ -3,6 +3,7 @@
 namespace Flowwow\Cloudpayments\Request\Receipt;
 
 use Flowwow\Cloudpayments\BaseRequest;
+use Flowwow\Cloudpayments\Exceptions\BadTypeException;
 
 /**
  * @see https://developers.cloudkassir.ru/#customerreceipt
@@ -33,6 +34,14 @@ class CustomerReceipt extends BaseRequest
     /** @var ReceiptIndustryRequisiteCollection[]|null */
     public ?array                                    $industryRequisiteCollection = null;
 
+    /** @var bool|null Признак интернет оплаты, тег ОФД 1125 */
+    public ?bool                                     $isInternetPayment          = null;
+
+    /** @var int|null Часовая зона места расчета, тег ОФД 1011 (1..11) */
+    public ?int                                      $timeZoneCode               = null;
+
+    /** @var NonCashPayment[]|null Массив объектов NonCashPayment, тег ОФД 1234 */
+    public ?array                                    $nonCashPayments            = null;
 
     /**
      * @param ReceiptItem[]  $items
@@ -44,5 +53,30 @@ class CustomerReceipt extends BaseRequest
         $this->items          = $items;
         $this->taxationSystem = $taxationSystem;
         $this->amounts        = $amounts;
+    }
+
+    /**
+     * @inheritDoc
+     * @return array
+     * @throws BadTypeException
+     */
+    public function asArray(): array
+    {
+        if ($this->timeZoneCode !== null) {
+            if ($this->timeZoneCode < 1 || $this->timeZoneCode > 11) {
+                throw new BadTypeException('timeZoneCode must be between 1 and 11');
+            }
+        }
+        if ($this->nonCashPayments !== null) {
+            if (!is_array($this->nonCashPayments)) {
+                throw new BadTypeException('nonCashPayments must be an array of NonCashPayment');
+            }
+            foreach ($this->nonCashPayments as $payment) {
+                if (!$payment instanceof NonCashPayment) {
+                    throw new BadTypeException('Each item of nonCashPayments must be instance of NonCashPayment');
+                }
+            }
+        }
+        return parent::asArray();
     }
 }

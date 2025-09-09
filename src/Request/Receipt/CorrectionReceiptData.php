@@ -7,6 +7,7 @@ use Flowwow\Cloudpayments\Enum\CorrectionReceiptType;
 use Flowwow\Cloudpayments\Enum\CorrectionType;
 use Flowwow\Cloudpayments\Enum\TaxationSystem;
 use Flowwow\Cloudpayments\Enum\VatRate;
+use Flowwow\Cloudpayments\Exceptions\BadTypeException;
 
 /**
  * Параметры формирования чека/состав чека.
@@ -88,4 +89,25 @@ class CorrectionReceiptData extends BaseRequest
 
     /** @var string|null Дополнительный реквизит чека (тег 1192) */
     public ?string $additionalReceiptRequisite;
+
+    /** @var bool|null Признак интернет оплаты, тег ОФД 1125 */
+    public ?bool $isInternetPayment = null;
+
+    /** @var int|null Часовая зона места расчета, тег ОФД 1011 (1..11) */
+    public ?int $timeZoneCode = null;
+
+    /**
+     * @inheritDoc
+     * @return array
+     * @throws BadTypeException
+     */
+    public function asArray(): array
+    {
+        if ($this->timeZoneCode !== null) {
+            if ($this->timeZoneCode < 1 || $this->timeZoneCode > 11) {
+                throw new BadTypeException('timeZoneCode must be between 1 and 11');
+            }
+        }
+        return parent::asArray();
+    }
 }
