@@ -32,7 +32,12 @@ class CustomerReceipt extends BaseRequest
     public ?ReceiptOperationReceiptRequisite         $operationReceiptRequisite  = null;
     /** @var ReceiptIndustryRequisiteCollection[]|null */
     public ?array                                    $industryRequisiteCollection = null;
-
+    /** @var bool|null Признак интернет оплаты, тег ОФД 1125 */
+    public ?bool                                     $isInternetPayment          = null;
+    /** @var int|null Часовая зона места расчета, тег ОФД 1011 (1..11) */
+    public ?int                                      $timeZoneCode               = null;
+    /** @var NonCashPayment[]|null Массив объектов NonCashPayment, тег ОФД 1234 */
+    public ?array                                    $nonCashPayments            = null;
 
     /**
      * @param ReceiptItem[]  $items
