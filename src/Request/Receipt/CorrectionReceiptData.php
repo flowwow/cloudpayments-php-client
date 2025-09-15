@@ -88,4 +88,10 @@ class CorrectionReceiptData extends BaseRequest
 
     /** @var string|null Дополнительный реквизит чека (тег 1192) */
     public ?string $additionalReceiptRequisite;
+
+    /** @var bool|null Признак интернет оплаты, тег ОФД 1125 */
+    public ?bool $isInternetPayment = null;
+
+    /** @var int|null Часовая зона места расчета, тег ОФД 1011 (1..11) */
+    public ?int $timeZoneCode = null;
 }
