@@ -24,6 +24,7 @@ class TokenPayment extends BaseRequest
     public ?string $email;
     public ?string $jsonData;
     public int     $trInitiatorCode;
+    public ?array  $splits;
 
     /**
      * TokenPayment constructor.

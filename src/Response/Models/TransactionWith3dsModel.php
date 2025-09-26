@@ -8,6 +8,8 @@ namespace Flowwow\Cloudpayments\Response\Models;
  */
 class TransactionWith3dsModel extends TransactionModel
 {
-    public ?string $paReq  = null;
-    public ?string $acsUrl = null;
+    public ?string $paReq   = null;
+    public ?string $acsUrl  = null;
+    public ?string $termUrl = null;
+    public ?string $md      = null;
 }
