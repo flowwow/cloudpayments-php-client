@@ -77,6 +77,7 @@ class TransactionModel extends BaseModel
     public ?string $qrImage                               = null;
     /** @var SbpBankModel[]|null  */
     public ?array  $sbpBankModels                         = null;
+    public ?array  $splits                                = null;
 
     /**
      * Получение переведенного кода ошибки
