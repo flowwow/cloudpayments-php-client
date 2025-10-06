@@ -588,4 +588,16 @@ class Library
 
         return $this->request($method, ['Id' => $receiptId], null, true);
     }
+
+    /**
+     * Получение данных о чеке
+     * @param string $receiptId ID-чека
+     * @return CloudResponse
+     */
+    public function getReceiptInfo(string $receiptId): CloudResponse
+    {
+        $method = CloudMethodsEnum::KKT_RECEIPT . '/get';
+
+        return $this->request($method, ['Id' => $receiptId], null, true);
+    }
 }
