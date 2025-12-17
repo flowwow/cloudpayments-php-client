@@ -43,6 +43,11 @@ class Vat extends Enum
      */
     public const PERCENT_20 = 20;
     /**
+     * 22% НДС
+     * @var int
+     */
+    public const PERCENT_22 = 22;
+    /**
      * Расчетный НДС 5/105
      * @var int
      */
@@ -62,6 +67,11 @@ class Vat extends Enum
      * @var int
      */
     public const PERCENT_120 = 120;
+    /**
+     * Расчетный НДС 22/122
+     * @var int
+     */
+    public const PERCENT_122 = 122;
     /**
      * НДС 12% (только для онлайн-касс в Казахстане)
      * @var int
