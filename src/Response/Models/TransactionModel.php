@@ -77,6 +77,8 @@ class TransactionModel extends BaseModel
     public ?string $qrImage                               = null;
     /** @var SbpBankModel[]|null  */
     public ?array  $sbpBankModels                         = null;
+    /** @var SbpBankModelV2[]|null  */
+    public ?array  $sbpBankModelsV2                       = null;
     public ?array  $splits                                = null;
 
     /**
