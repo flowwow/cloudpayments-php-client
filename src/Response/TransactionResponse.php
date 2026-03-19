@@ -48,7 +48,7 @@ class TransactionResponse extends CloudResponse
         ];
         if (isset($modelDate->Banks->dictionary) && is_array($modelDate->Banks->dictionary)) {
             foreach ($modelDate->Banks->dictionary as $bankValue) {
-                $bank    = new SbpBankModel();
+                $bank = new SbpBankModel();
                 $bank->fill($bankValue);
                 $banks['v1'][] = $bank;
             }
@@ -59,7 +59,7 @@ class TransactionResponse extends CloudResponse
                 ? ($modelDate->V2Banks[0]->Members ?? [])
                 : ($modelDate->V2Banks->Members ?? []);
             foreach ($bankMembersV2 as $bankValue) {
-                $bank    = new SbpBankModelV2();
+                $bank = new SbpBankModelV2();
                 $bank->fill($bankValue);
                 $banks['v2'][] = $bank;
             }
