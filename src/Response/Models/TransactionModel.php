@@ -80,6 +80,7 @@ class TransactionModel extends BaseModel
     /** @var SbpBankModelV2[]|null  */
     public ?array  $sbpBankModelsV2                       = null;
     public ?array  $splits                                = null;
+    public ?float  $vatAboveTotalFee                      = null;
 
     /**
      * Получение переведенного кода ошибки

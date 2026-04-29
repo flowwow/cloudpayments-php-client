@@ -46,4 +46,7 @@ class HookPay extends BaseHook
     public ?string $cardProduct                           = null;
     public ?string $paymentMethod                         = null;
     public ?int    $fallBackScenarioDeclinedTransactionId = null;
+    public ?float  $vatAboveTotalFee                      = null;
+    public ?float  $processorAndPartnerFee                = null;
+    public ?float  $vatWithinProcessorFee                 = null;
 }
