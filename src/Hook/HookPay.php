@@ -49,4 +49,7 @@ class HookPay extends BaseHook
     public ?string $vatAboveTotalFee                      = null;
     public ?string $processorAndPartnerFee                = null;
     public ?string $vatWithinProcessorFee                 = null;
+    public ?string $rrn                                   = null;
+    public ?float  $paymentAmount                         = null;
+    public ?string $paymentCurrency                       = null;
 }
