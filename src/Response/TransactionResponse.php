@@ -2,6 +2,7 @@
 
 namespace Flowwow\Cloudpayments\Response;
 
+use Flowwow\Cloudpayments\Response\Models\ExtensionDataModel;
 use Flowwow\Cloudpayments\Response\Models\SbpBankModel;
 use Flowwow\Cloudpayments\Response\Models\SbpBankModelV2;
 use Flowwow\Cloudpayments\Response\Models\TransactionModel;
@@ -24,6 +25,14 @@ class TransactionResponse extends CloudResponse
     {
         $model = new TransactionModel();
         $banks = $this->getBankModels($modelDate);
+        if (
+            isset($modelDate->ExtensionData)
+            && $modelDate->ExtensionData instanceof stdClass
+        ) {
+            $extensionData = new ExtensionDataModel();
+            $extensionData->fill($modelDate->ExtensionData);
+            $modelDate->ExtensionData = $extensionData;
+        }
 
         $model->fill($modelDate);
         if (!empty($banks['v1'])) {
