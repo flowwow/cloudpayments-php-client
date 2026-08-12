@@ -30,7 +30,7 @@ abstract class PaymentsAlt extends BaseRequest implements PaymentsAltInterface
     public ?bool   $isTest;
 
     /**
-     * PaymentsDigitalRub constructor.
+     * PaymentsAlt constructor.
      * @param mixed $amount
      * @param string $publicId
      * @param string $currency
