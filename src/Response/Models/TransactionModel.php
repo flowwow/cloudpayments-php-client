@@ -81,6 +81,7 @@ class TransactionModel extends BaseModel
     public ?array  $sbpBankModelsV2                       = null;
     public ?array  $splits                                = null;
     public ?string $vatAboveTotalFee                      = null;
+    public ?ExtensionDataModel $extensionData             = null;
 
     /**
      * Получение переведенного кода ошибки

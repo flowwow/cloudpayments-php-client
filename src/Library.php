@@ -11,6 +11,7 @@ use Flowwow\Cloudpayments\Request\NotificationsGet;
 use Flowwow\Cloudpayments\Request\NotificationsUpdate;
 use Flowwow\Cloudpayments\Request\OrderCancel;
 use Flowwow\Cloudpayments\Request\OrderCreate;
+use Flowwow\Cloudpayments\Request\PaymentsAltInterface;
 use Flowwow\Cloudpayments\Request\PaymentsConfirm;
 use Flowwow\Cloudpayments\Request\PaymentsFind;
 use Flowwow\Cloudpayments\Request\PaymentsGet;
@@ -365,6 +366,18 @@ class Library
     public function paymentsSbpQr(PaymentsSbpQr $data): TransactionResponse
     {
         $method = CloudMethodsEnum::PAYMENTS_SBP_QR;
+
+        return $this->request($method, $data->asArray(), new TransactionResponse());
+    }
+
+    /**
+     * Альтернативный метод оплаты (ЦР, Долями)
+     * @param PaymentsAltInterface $data
+     * @return TransactionResponse
+     */
+    public function paymentsAlt(PaymentsAltInterface $data): TransactionResponse
+    {
+        $method = CloudMethodsEnum::PAYMENTS_ALT_PAY;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
     }
