@@ -226,6 +226,19 @@ class Library
     }
 
     /**
+     * Подтверждение оплаты со сплитованием
+     * @param PaymentsConfirm $data
+     * @param array $splits
+     * @return CloudResponse
+     */
+    public function confirmPaymentSplit(PaymentsConfirm $data, array $splits): CloudResponse
+    {
+        $method  = CloudMethodsEnum::PAYMENTS_CONFIRM;
+
+        return $this->request($method, array_merge($data->asArray(), ['Splits' => $splits]));
+    }
+
+    /**
      * Список транзакций за определенное время
      * @param PaymentsList $data
      * @return TransactionArrayResponse
@@ -295,6 +308,19 @@ class Library
         $method = CloudMethodsEnum::PAYMENTS_REFUND;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
+    }
+
+    /**
+     * Возврат средств со сплитованием
+     * @param PaymentsRefund $data
+     * @param array $splits
+     * @return TransactionResponse
+     */
+    public function paymentsRefundSplit(PaymentsRefund $data, array $splits): TransactionResponse
+    {
+        $method = CloudMethodsEnum::PAYMENTS_REFUND;
+
+        return $this->request($method, array_merge($data->asArray(), ['Splits' => $splits]), new TransactionResponse());
     }
 
     /**
