@@ -545,28 +545,24 @@ class Library
         bool $asJson = false
     ): CloudResponse {
         $response = $this->sendRequest($method, $postData, $asJson);
-        $responseBody = $response->getBody()->getContents();
         if ($this->logger) {
-            $loggedPostData = $postData;
-            if ($method === CloudMethodsEnum::SBP_BANKS_INFO && array_key_exists('Token', $loggedPostData)) {
-                $loggedPostData['Token'] = '[REDACTED]';
-            }
             $context = [
                 'method'   => $method,
-                'postData' => $loggedPostData,
+                'postData' => $postData,
                 'asJson'   => $asJson ? 'yes' : 'no',
                 'trace'    => debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 20)
             ];
+            $msg     = $response->getBody()->getContents();
             if ($response->getStatusCode() !== 200) {
-                $this->logger->error($responseBody, $context);
+                $this->logger->error($msg, $context);
             } else {
-                $this->logger->debug($responseBody, $context);
+                $this->logger->debug($msg, $context);
             }
         }
 
         $cloudResponse = $cloudResponse ?? new CloudResponse();
 
-        return $cloudResponse->fillByBody($responseBody);
+        return $cloudResponse->fillByResponse($response);
     }
 
     /**
