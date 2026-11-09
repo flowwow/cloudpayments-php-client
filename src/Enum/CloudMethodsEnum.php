@@ -49,6 +49,9 @@ class CloudMethodsEnum extends Enum
     /** Генерация QR-кода СБП */
     public const PAYMENTS_SBP_QR = 'payments/qr/sbp/image';
 
+    /** Список участников СБП */
+    public const SBP_BANKS_INFO = 'sbp/v2/banks/info';
+
     /** Оплата альтернативными способами */
     public const PAYMENTS_ALT_PAY = 'payments/altpay/pay';
 

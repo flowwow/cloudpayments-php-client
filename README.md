@@ -58,6 +58,7 @@ $apiClient->paymentsCardsCharge(\*...*\);
 | payments/find                    | getPaymentDataByInvoice     | PaymentsFind                | TransactionResponse        |
 | payments/list                    | getListPayment              | PaymentsList                | TransactionArrayResponse   |
 | payments/tokens/list             | paymentsTokensList          | TokenList                   | TokenArrayResponse         |
+| sbp/v2/banks/info                | sbpBanksInfo                | SbpBanksInfo                | SbpBanksInfoResponse       |
 | subscriptions/create             | subscriptionsCreate         | SubscriptionCreate          | SubscriptionResponse       |
 | subscriptions/get                | subscriptionsGet            | SubscriptionGet             | SubscriptionResponse       |
 | subscriptions/find               | subscriptionsFind           | SubscriptionFind            | SubscriptionArrayResponse  |
@@ -98,6 +99,8 @@ try {
 Параметры ответа так же обернуты в dto-объект. ```CloudResponse``` имеет 3 свойства: ```success```, ```message```, ```model``` 
 
 В свойство ```model``` записывается нужная сущность, в зависимости от запроса.
+
+Для списка участников СБП вызовите `sbpBanksInfo(new SbpBanksInfo($publicTerminalId))`. Необязательные поля запроса доступны как свойства DTO. В ответе `model` содержит массив групп `SbpBanksGroupModel`; каждая группа содержит `source`, `version` и массив `members` из `SbpBankModelV2`. Порядок групп и банков сохраняется. Поля `isRenewSubscription` и `saveCard` отправляются как JSON boolean.
 
 Список поддерживаемых сущностей:
 - ```AppleSessionModel```

@@ -23,6 +23,7 @@ use Flowwow\Cloudpayments\Request\PaymentsSbpQr;
 use Flowwow\Cloudpayments\Request\PaymentsVoid;
 use Flowwow\Cloudpayments\Request\Post3DS;
 use Flowwow\Cloudpayments\Request\Receipt\CorrectionReceiptData;
+use Flowwow\Cloudpayments\Request\SbpBanksInfo;
 use Flowwow\Cloudpayments\Request\SubscriptionCancel;
 use Flowwow\Cloudpayments\Request\SubscriptionCreate;
 use Flowwow\Cloudpayments\Request\SubscriptionFind;
@@ -36,6 +37,7 @@ use Flowwow\Cloudpayments\Response\CloudResponse;
 use Flowwow\Cloudpayments\Response\KktReceiptResponse;
 use Flowwow\Cloudpayments\Response\NotificationResponse;
 use Flowwow\Cloudpayments\Response\OrderResponse;
+use Flowwow\Cloudpayments\Response\SbpBanksInfoResponse;
 use Flowwow\Cloudpayments\Response\SubscriptionArrayResponse;
 use Flowwow\Cloudpayments\Response\SubscriptionResponse;
 use Flowwow\Cloudpayments\Response\TokenArrayResponse;
@@ -394,6 +396,18 @@ class Library
         $method = CloudMethodsEnum::PAYMENTS_SBP_QR;
 
         return $this->request($method, $data->asArray(), new TransactionResponse());
+    }
+
+    /**
+     * Список участников СБП с учетом платформы клиента
+     * @param SbpBanksInfo $data
+     * @return SbpBanksInfoResponse
+     */
+    public function sbpBanksInfo(SbpBanksInfo $data): SbpBanksInfoResponse
+    {
+        $method = CloudMethodsEnum::SBP_BANKS_INFO;
+
+        return $this->request($method, $data->asArray(), new SbpBanksInfoResponse(), true);
     }
 
     /**
