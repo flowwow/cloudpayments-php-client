@@ -23,6 +23,7 @@ use Flowwow\Cloudpayments\Request\PaymentsSbpQr;
 use Flowwow\Cloudpayments\Request\PaymentsVoid;
 use Flowwow\Cloudpayments\Request\Post3DS;
 use Flowwow\Cloudpayments\Request\Receipt\CorrectionReceiptData;
+use Flowwow\Cloudpayments\Request\SbpBanksInfo;
 use Flowwow\Cloudpayments\Request\SubscriptionCancel;
 use Flowwow\Cloudpayments\Request\SubscriptionCreate;
 use Flowwow\Cloudpayments\Request\SubscriptionFind;
@@ -36,6 +37,7 @@ use Flowwow\Cloudpayments\Response\CloudResponse;
 use Flowwow\Cloudpayments\Response\KktReceiptResponse;
 use Flowwow\Cloudpayments\Response\NotificationResponse;
 use Flowwow\Cloudpayments\Response\OrderResponse;
+use Flowwow\Cloudpayments\Response\SbpBanksInfoResponse;
 use Flowwow\Cloudpayments\Response\SubscriptionArrayResponse;
 use Flowwow\Cloudpayments\Response\SubscriptionResponse;
 use Flowwow\Cloudpayments\Response\TokenArrayResponse;
@@ -397,6 +399,18 @@ class Library
     }
 
     /**
+     * Список участников СБП с учетом платформы клиента
+     * @param SbpBanksInfo $data
+     * @return SbpBanksInfoResponse
+     */
+    public function sbpBanksInfo(SbpBanksInfo $data): SbpBanksInfoResponse
+    {
+        $method = CloudMethodsEnum::SBP_BANKS_INFO;
+
+        return $this->request($method, $data->asArray(), new SbpBanksInfoResponse(), true);
+    }
+
+    /**
      * Альтернативный метод оплаты (ЦР, Долями)
      * @param PaymentsAltInterface $data
      * @return TransactionResponse
@@ -531,24 +545,28 @@ class Library
         bool $asJson = false
     ): CloudResponse {
         $response = $this->sendRequest($method, $postData, $asJson);
+        $responseBody = $response->getBody()->getContents();
         if ($this->logger) {
+            $loggedPostData = $postData;
+            if ($method === CloudMethodsEnum::SBP_BANKS_INFO && array_key_exists('Token', $loggedPostData)) {
+                $loggedPostData['Token'] = '[REDACTED]';
+            }
             $context = [
                 'method'   => $method,
-                'postData' => $postData,
+                'postData' => $loggedPostData,
                 'asJson'   => $asJson ? 'yes' : 'no',
                 'trace'    => debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 20)
             ];
-            $msg     = $response->getBody()->getContents();
             if ($response->getStatusCode() !== 200) {
-                $this->logger->error($msg, $context);
+                $this->logger->error($responseBody, $context);
             } else {
-                $this->logger->debug($msg, $context);
+                $this->logger->debug($responseBody, $context);
             }
         }
 
         $cloudResponse = $cloudResponse ?? new CloudResponse();
 
-        return $cloudResponse->fillByResponse($response);
+        return $cloudResponse->fillByBody($responseBody);
     }
 
     /**

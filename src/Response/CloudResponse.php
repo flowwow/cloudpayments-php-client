@@ -27,7 +27,17 @@ class CloudResponse extends BaseRequest
      */
     public function fillByResponse(ResponseInterface $response): self
     {
-        $responseContent = json_decode($response->getBody()->getContents());
+        return $this->fillByBody($response->getBody()->getContents());
+    }
+
+    /**
+     * Заполняет по уже прочитанному телу ответа
+     * @param string $body
+     * @return static
+     */
+    public function fillByBody(string $body): self
+    {
+        $responseContent = json_decode($body);
 
         $this->success = $responseContent->Success ?? false;
         $this->message = $responseContent->Message ?? 'Message is not set';
