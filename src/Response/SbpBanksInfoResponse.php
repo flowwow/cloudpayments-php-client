@@ -3,15 +3,22 @@
 namespace Flowwow\Cloudpayments\Response;
 
 use Flowwow\Cloudpayments\Response\Models\SbpBanksGroupModel;
+use stdClass;
 
 /**
- * Response from /sbp/v2/banks/info.
+ * Ответ со списком участников СБП, сгруппированных по источникам.
+ * @see https://developers.cloudpayments.ru/#spisok-uchastnikov-sbp
  */
 class SbpBanksInfoResponse extends CloudResponse
 {
-    /** @var SbpBanksGroupModel[] */
+    /** @var SbpBanksGroupModel[] Группы банков в порядке ответа CloudPayments. */
     public $model = [];
 
+    /**
+     * Заполняет группы и вложенные модели банков из ответа API.
+     * @param stdClass[] $modelDate
+     * @return void
+     */
     public function fillModel($modelDate)
     {
         $this->model = [];
